@@ -1,0 +1,36 @@
+# Pre-extracted features (regenerate via notebooks)
+data/features/
+data/processed/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+
+# Outputs
+*.log
+logs/
+figures/outputs/
+outputs/
+results/
+
+
+# Model checkpoints
+*.pth
+*.pt
+*.ckpt
+
+# Jupyter
+.ipynb_checkpoints/
+
+# macOS
+.DS_Store
+
+# IDEs
+.vscode/
+.idea/
