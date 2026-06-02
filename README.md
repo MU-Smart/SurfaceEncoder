@@ -8,9 +8,16 @@
   <img src="https://img.shields.io/badge/PyTorch-2.0%2B-red?style=flat-square" alt="PyTorch 2.0+"/>
 </p>
 
-<p align="center">
-  <img src="figures/EUChair.png" width="240" alt="Wheelchair urban navigation"/>
-</p>
+<table align="center">
+  <tr>
+    <td align="center">
+      <img src="figures/EUChair.png" height="220" alt="Wheelchair urban navigation"/>
+    </td>
+    <td align="center">
+      <img src="figures/mapping.gif" height="220" alt="Real-time surface mapping"/>
+    </td>
+  </tr>
+</table>
 
 ## Highlights
 
@@ -34,7 +41,7 @@
 
 ### Surface Classes
 
-The labeled subset covers 12 distinct surface types encountered in real urban wheelchair use:
+Surface ID-to-name mappings are in [`data/metadata/surface_types.csv`](data/metadata/surface_types.csv). The labeled subset covers 12 distinct surface types encountered in real urban wheelchair use:
 
 | ID  | Surface Type                 | Regions      |
 | :-: | :--------------------------- | :----------- |
@@ -71,12 +78,18 @@ Data was recorded by mounting consumer smartphones (Samsung Galaxy S7, Samsung G
 
 ### Geographic Coverage — Unlabeled European Routes
 
-<p align="center">
-  <img src="figures/parisFrance.png" width="480" alt="GPS route — Paris, France"/>
-  &nbsp;&nbsp;
-  <img src="figures/schlossMortizburgGermany.png" width="480" alt="GPS route — Schloss Moritzburg, Germany"/>
-  <br/><em>Left: unlabeled wheelchair transit route in Paris, France. &nbsp; Right: route near Schloss Moritzburg, Germany.</em>
-</p>
+<table align="center">
+  <tr>
+    <td align="center">
+      <img src="figures/parisFrance.png" height="180" alt="GPS route — Paris, France"/>
+      <br/><em>Left: unlabeled wheelchair transit route in Paris, France.</em>
+    </td>
+    <td align="center">
+      <img src="figures/schlossMortizburgGermany.png" height="180" alt="GPS route — Schloss Moritzburg, Germany"/>
+      <br/><em>Right: route near Schloss Moritzburg, Germany.</em>
+    </td>
+  </tr>
+</table>
 
 Interactive route maps for [Dresden, Germany](figures/Dresden.html) and [full European coverage](figures/Europe.html) are available as standalone HTML files.
 
@@ -117,13 +130,32 @@ conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvi
 
 ## Usage
 
-### 2. Train SurfaceEncoder
+> **Note:** `data/processed/` and `data/features/` are git-ignored. Run the notebooks below in order before training.
+
+### 1. Preprocess Raw Data
+
+```bash
+jupyter notebook notebooks/data_preprocessor.ipynb
+```
+
+Reads raw CSVs from `data/raw/`, cleans and segments signals, writes outputs to `data/processed/`.
+
+### 2. Extract Features
+
+```bash
+jupyter notebook notebooks/handcrafted_feature_extractor.ipynb
+```
+
+Reads `data/processed/`, applies windowing, writes windowed CSVs to `data/features/`.
+
+### 3. Train SurfaceEncoder
 
 ```bash
 python src/surface_encoder.py
 ```
 
 The script runs end-to-end:
+
 1. Loads windowed labeled + unlabeled CSVs from `data/features/`
 2. Z-normalises per-window per-channel; stratified 80/20 split
 3. Trains SurfaceEncoder (log-cosh reconstruction + auxiliary classification loss)
@@ -134,7 +166,7 @@ The script runs end-to-end:
 
 Key hyperparameters are in `CONFIG` at the top of `src/surface_encoder.py`.
 
-### 4. Run Baselines
+### 4. Run Baselines (Optional)
 
 Each baseline is self-contained:
 
@@ -169,7 +201,13 @@ All baselines share the same evaluation protocol and produce comparable metric t
 
 Same columns as above plus `latitude`, `longitude` (GPS available for the unlabeled European subset only).
 
-### Pre-extracted Windows (`data/features/`)
+### Processed Files (`data/processed/`) — git-ignored
+
+Intermediate CSVs generated from raw data. Regenerate via `notebooks/data_preprocessor.ipynb`.
+
+### Pre-extracted Windows (`data/features/`) — git-ignored
+
+Regenerate via `notebooks/handcrafted_feature_extractor.ipynb`.
 
 | Column                       | Description                         |
 | :--------------------------- | :---------------------------------- |
