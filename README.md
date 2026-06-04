@@ -33,11 +33,11 @@
 
 ### Overview
 
-| Subset                  | Geography           |  Duration | Data Points | Labels | GPS |
-| :---------------------- | :------------------ | --------: | ----------: | :----: | :-: |
-| Labeled controlled      | USA + Vietnam       |    13.6 h |      ~9.5 M |   ✓    |  ✗  |
-| Unlabeled urban transit | Europe (AT, FR, DE) |    ~170 h |       ~43 M |   ✗    |  ✓  |
-| **Total**               | **5 countries**     | **183 h** |    **52 M** |   —    |  —  |
+| Subset                  | Geography           |     Duration |  Data Frames | Labels | GPS |
+| :---------------------- | :------------------ | -----------: | -----------: | :----: | :-: |
+| Labeled controlled      | USA + Vietnam       |    13:39:40  |   31,612,466 |   ✓    |  ✗  |
+| Unlabeled urban transit | Europe (AT, FR, DE) |   169:48:06  |   20,533,838 |   ✗    |  ✓  |
+| **Total**               | **5 countries**     | **183:27:46** | **52,146,304** |   —    |  —  |
 
 ### Surface Classes
 
@@ -65,7 +65,7 @@ Surface ID-to-name mappings are in [`data/metadata/surface_types.csv`](data/meta
 
 ### Collection Protocol
 
-Data was recorded by mounting consumer smartphones (Samsung Galaxy S7, Samsung Galaxy J7, Motorola Moto G7/G8/G9) to manual wheelchairs. Labeled sessions used fixed routes on target surfaces with manual surface annotation. Unlabeled sessions captured continuous naturalistic wheelchair transit across three European cities.
+Data was recorded by mounting consumer smartphones to manual wheelchairs. Labeled sessions (USA & Vietnam) used fixed routes on target surfaces with manual surface annotation, recorded on **Redmi Note 7** (variations), **Samsung Galaxy J7**, **Samsung Galaxy S7**, and **Samsung Galaxy S9**. Unlabeled sessions captured continuous naturalistic wheelchair transit across three European cities using **Motorola G4 Plus** devices (Phone 7, 8, 9).
 
 ### Sensor Specifications
 
